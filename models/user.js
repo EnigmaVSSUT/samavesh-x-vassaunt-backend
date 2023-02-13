@@ -88,4 +88,16 @@ userSchema.methods.addEvents = function(event){
     return this.save();
 }
 
+userSchema.methods.deleteEvents = function(event){
+    const eventIndex = this.events.findIndex(eventName => {
+        return eventName === event.eventName
+    })
+    // console.log(eventIndex)
+    this.events.splice(eventIndex, 1)
+    // console.log(this.events)
+    // this.events = updatedEvents
+
+    return this.save()
+}
+
 module.exports = mongoose.model('user', userSchema)

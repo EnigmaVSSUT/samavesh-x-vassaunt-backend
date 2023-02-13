@@ -26,7 +26,7 @@ exports.postLogin = async(req, res, next)=>{
         const user = await User.login(email, password)
         const token = createToken(user._id)
 
-        res.json({email, token})
+        res.json({user, token})
     }catch(err){
         res.json({msg: err.message})
     }
@@ -51,8 +51,27 @@ exports.postAddEvent = async(req, res, next)=>{
     // console.log(_id)
 
     User.findById(_id).then(async(user) => {
-        // console.log(user)
         const addEvent = await user.addEvents(event)
         res.json(addEvent)
     }).catch(err => {res.json({msg: err.message})})
+}
+
+exports.postDeleteEvent = async(req, res, next)=>{
+    const {authorization} = req.headers
+    const {event} = req.body
+
+    if(!authorization){
+        res.json({msg: "Login to participate"})
+        return
+    }
+
+    const token = authorization.split(" ")[1]
+
+    const {_id} = jwt.verify(token, process.env.SECRET)
+
+    User.findById(_id).then(async(user) => {
+        const deleteEvent = await user.deleteEvents(event)
+        res.json(deleteEvent)
+    }).catch(err => {res.json({msg: err.message})})
+
 }
