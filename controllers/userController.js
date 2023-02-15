@@ -1,5 +1,43 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
+const nodemailer = require('nodemailer')
+
+
+const sendOTPVerification = async(email, res)=>{
+
+    const transporter = nodemailer.createTransport({
+        "host": "smtp-mail.outlook.com",
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
+        }
+    })
+    
+    try {
+        const otp = `${Math.floor(1000 + Math.random()*9000)}`
+    
+        const mailOption = {
+            from: process.env.EMAIL,
+            to: email,
+            subject: "Verify your Email",
+            html: `<p>Enter <b>${otp}</b> to verify your email. <b>OTP will expire in 10 minutes.</b></p>`
+        }
+    
+        await transporter.sendMail(mailOption)
+
+        res.json({
+            otp: `${otp}`,
+            message: "Verification OTP sent to mail"
+        })    
+    } catch (error) {
+        res.json({
+            "err": error.message,
+            "status": "failed",
+            "message": "Verification OTP is not sent"
+        })
+    }
+
+}
 
 const createToken = (_id)=>{
     return jwt.sign({ _id }, process.env.SECRET, { expiresIn:'1d' })
@@ -7,16 +45,18 @@ const createToken = (_id)=>{
 
 exports.postSignUp = async(req, res, next)=>{
     const {username, email, password, isVssutian, regdNo} = req.body
+    console.log(email)
+    sendOTPVerification(email, res)
 
-    try{
+    // try{
 
-        const user = await User.signup(username, email, password, isVssutian, regdNo)
-        const token = createToken(user._id)
-        res.json({email, token})
+    //     const user = await User.signup(username, email, password, isVssutian, regdNo)
+    //     const token = createToken(user._id)
+    //     res.json({email, token})
 
-    }catch(err){
-        res.json({msg: err.message});
-    }
+    // }catch(err){
+    //     res.json({msg: err.message});
+    // }
 }
 
 exports.postLogin = async(req, res, next)=>{
