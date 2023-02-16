@@ -1,6 +1,9 @@
 const nodemailer = require("nodemailer");
 
-const sendOTPVerification = async (email, res) => {
+const sendOTPVerification = async (req, res, next) => {
+
+  const email = req.body.email
+
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
     auth: {

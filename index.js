@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 const eventRoutes = require("./routes/events/events.routes");
 app.use("/api/events", eventRoutes);
 const authRoutes = require("./routes/Auth/auth.routes");
-app.use("api/authRoutes", authRoutes);
+app.use("/api/authRoutes", authRoutes);
 
 mongoose.set("strictQuery", false);
 mongoose
