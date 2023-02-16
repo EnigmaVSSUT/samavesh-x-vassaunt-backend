@@ -7,7 +7,8 @@ const userRouter = require('./routes/userRoute')
 
 
 app.use(cors())
-app.use(express.json())
+app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(userRouter)
 const eventRoutes = require("./routes/events/events.routes");
