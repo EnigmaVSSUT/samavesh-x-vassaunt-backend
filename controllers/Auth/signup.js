@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 const signUp = async (req, res, next)=>{
-    const { username, email, password, isVssutian, regdNo, college, graduationYear, branch } = req.body
+    const { username, email, password, isVssutian, regdNo, college, graduationYear, branch, phone } = req.body
 
     
     try {
-        if (!email || !password || !username || !isVssutian || !college || !graduationYear || !branch) {
+        if (!email || !password || !username || isVssutian == null || !college || !graduationYear || !branch || !phone) {
             res.json({
                 success: false,
                 message: 'All fields must be filled'
@@ -30,14 +30,15 @@ const signUp = async (req, res, next)=>{
                     username, 
                     email, 
                     password: hash, 
-                    isVssutian, 
+                    isVssutian: isVssutian, 
                     regdNo, 
                     events: [],  
                     college,
                     graduationYear,
                     branch,
-                    paymentStatus: isVssutian
-        
+                    paymentStatus: isVssutian,
+                    ticketGenerated: isVssutian,
+                    phone
                 })
         
                 user.save().then(user => {

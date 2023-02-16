@@ -14,6 +14,8 @@ const eventRoutes = require("./routes/events/events.routes");
 app.use("/api/events", eventRoutes);
 const authRoutes = require("./routes/Auth/auth.routes");
 app.use("/api/authRoutes", authRoutes);
+const paymentRoutes = require('./routes/payment/payment.routes')
+app.use("/api/paymentRoutes", paymentRoutes)
 
 mongoose.set("strictQuery", false);
 mongoose
