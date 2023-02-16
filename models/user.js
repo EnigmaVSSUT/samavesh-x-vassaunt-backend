@@ -11,84 +11,87 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    password:{
+    password: {
         type: String,
         required: true
     },
-    isVssutian:{
+    isVssutian: {
         type: Boolean,
         required: true,
         default: false
     },
-    regdNo:{
+    regdNo: {
         type: String,
     },
     events: [
         {
-            type: String
+            type: mongoose.Types.ObjectId, ref: "Event"
         }
-    ]
-}, {timestamps: true})
+    ],
+    college: { type: String, required: true },
+    graduationYear: { type: Number, required: true },
+    branch: { type: String, required: true },
+}, { timestamps: true })
 
-userSchema.statics.signup = async function(username, email, password, isVssutian, regdNo){
+userSchema.statics.signup = async function (username, email, password, isVssutian, regdNo) {
 
-    if(!email || !password || !username || !isVssutian){
+    if (!email || !password || !username || !isVssutian) {
         throw Error('All fields must be filled')
     }
 
-    const emailExist = await this.findOne({email});
-    const regdExist = await this.findOne({regdNo});
+    const emailExist = await this.findOne({ email });
+    const regdExist = await this.findOne({ regdNo });
 
-    if(emailExist || regdExist){
+    if (emailExist || regdExist) {
         throw Error("Email or registration number already in use");
     }
 
     const salt = await bcrypt.genSalt(12);
     const hash = await bcrypt.hash(password, salt)
 
-    const user = this.create({username, email, password: hash, isVssutian, regdNo, events:[]})
+    const user = this.create({ username, email, password: hash, isVssutian, regdNo, events: [] })
 
     return user
 }
 
-userSchema.statics.login = async function(email, password){
-    if(!email || !password){
+userSchema.statics.login = async function (email, password) {
+    if (!email || !password) {
         throw Error("All fields must be filled")
     }
 
-    const user = await this.findOne({email})
-    if(!user){
+    const user = await this.findOne({ email })
+    if (!user) {
         throw Error('Email not registered')
     }
 
     const match = await bcrypt.compare(password, user.password)
 
-    if(!match){
+    if (!match) {
         throw Error("Password incorrect")
     }
 
     return user
 }
 
-userSchema.methods.addEvents = function(event){
+userSchema.methods.addEvents = function (event) {
     const eventIndex = this.events.findIndex(eventName => {
         return eventName === event.eventName
     })
 
     const updatedEvents = [...this.events]
 
-    if(eventIndex >= 0){
+    if (eventIndex >= 0) {
         throw Error("Already Registered for the event")
     }
-    else{
+    else {
         updatedEvents.push(event.eventName)
     }
-    
+
     this.events = updatedEvents
     return this.save();
 }
 
-userSchema.methods.deleteEvents = function(event){
+userSchema.methods.deleteEvents = function (event) {
     const eventIndex = this.events.findIndex(eventName => {
         return eventName === event.eventName
     })

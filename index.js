@@ -10,12 +10,14 @@ app.use(cors())
 app.use(express.json())
 
 app.use(userRouter)
+const eventRoutes = require("./routes/events/events.routes");
+app.use("/api/events", eventRoutes);
 
 mongoose.set("strictQuery", false)
 mongoose.connect(process.env.MONGODB_URI)
-    .then(()=>{
-        app.listen(8000, ()=>{
+    .then(() => {
+        app.listen(8000, () => {
             console.log("connected to db")
         })
     })
-    .catch((err)=>{console.log(err)})
+    .catch((err) => { console.log(err) })
