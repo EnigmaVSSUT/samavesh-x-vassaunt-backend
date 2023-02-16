@@ -31,6 +31,7 @@ const userSchema = new Schema({
     college: { type: String, required: true },
     graduationYear: { type: Number, required: true },
     branch: { type: String, required: true },
+    paymentStatus: { type: Boolean, required: true, default: false },
 }, { timestamps: true })
 
 userSchema.statics.signup = async function (username, email, password, isVssutian, regdNo) {
