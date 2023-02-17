@@ -5,7 +5,9 @@ const sendOTPVerification = async (req, res, next) => {
   const email = req.body.email
 
   const transporter = nodemailer.createTransport({
-    host: "smtp-mail.outlook.com",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.EMAIL,
       pass: process.env.PASSWORD,
@@ -58,7 +60,7 @@ const sendOTPVerification = async (req, res, next) => {
             </h1>
           
             <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px;">
-              <span>${date.getHours()<10?'0'+date.getHours():date.getHours()}:${date.getMinutes()<10?'0'+date.getMinutes():date.getMinutes()}:${date.getSeconds()<10?'0'+date.getSeconds():date.getSeconds()}</span>
+              <span>${date.getHours() < 10 ? '0' + date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}:${date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()}</span>
               <span style="display: flex; align-items: center;">
                 <a href="https://enigmavssut.com/" target="_blank">
                   <img
