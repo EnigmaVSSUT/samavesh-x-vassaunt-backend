@@ -13,9 +13,9 @@ app.use(express.urlencoded({ extended: true }));
 const eventRoutes = require("./routes/events/events.routes");
 app.use("/api/events", eventRoutes);
 const authRoutes = require("./routes/Auth/auth.routes");
-app.use("/api/authRoutes", authRoutes);
+app.use("/api/auth", authRoutes);
 const paymentRoutes = require('./routes/payment/payment.routes')
-app.use("/api/paymentRoutes", paymentRoutes)
+app.use("/api/payment", paymentRoutes)
 
 mongoose.set("strictQuery", false);
 mongoose
