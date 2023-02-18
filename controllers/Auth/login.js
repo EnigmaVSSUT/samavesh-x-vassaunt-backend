@@ -30,9 +30,19 @@ const login = async(req, res, next)=>{
                         message: "Incorrect Password"
                     })
                 } else{
-                    const userId = user._id
+                    const userId = user._id;
+                    const email = user.email;
+                    const isVssutian = user.isVssutian;
+                    const regdNo = user.regdNo;
+                    const events = user.events;
+                    const college = user.college;
+                    const graduationYear = user.graduationYear;
+                    const branch = user.branch;
+                    const paymentStatus = user.paymentStatus;
+                    const phone = user.phone;
+
                 
-                    const token = jwt.sign({userId}, process.env.SECRET)
+                    const token = jwt.sign({userId, email, isVssutian, regdNo, events, college, graduationYear, branch, paymentStatus, phone}, process.env.SECRET)
                     
                     res.json({
                         success: true,
