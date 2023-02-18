@@ -14,7 +14,8 @@ const signUp = async (req, res, next) => {
             })
         } else {
             const emailExist = await User.findOne({ email });
-            const regdExist = await User.findOne({ regdNo });
+            let regdExist
+            if(regdNo != 1) regdExist = await User.findOne({ regdNo });
 
             if (emailExist || regdExist) {
                 res.json({

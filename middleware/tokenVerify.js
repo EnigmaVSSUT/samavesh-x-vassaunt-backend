@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 
 const tokenValidator = async (req, res, next) => {
     if (await req.headers.authorisation) {
-        //console.log(req.headers.authorisation);
         //console.log("in it");
         try {
             //console.log("inside it");
