@@ -5,14 +5,14 @@ const sendOTPVerification = async (req, res, next) => {
   const email = await req.body.email
   // console.log(req.body.email, email)
   const transporter = nodemailer.createTransport({
-    host: "smtp-mail.outlook.com",
+    host: "smtp.gmail.com",
     auth: {
       user: process.env.EMAIL,
       pass: process.env.PASSWORD,
     },
   });
 
-  if(email.length>0){
+  if (email.length > 0) {
     const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
     const date = new Date()
 
@@ -77,9 +77,9 @@ const sendOTPVerification = async (req, res, next) => {
 
     await transporter
       .sendMail(mailOption)
-      .then(()=>{
+      .then(() => {
         res.json({
-          otp,
+          otp: otp,
           message: `Verification OTP sent to ${email}`,
           success: true,
         })
@@ -90,9 +90,9 @@ const sendOTPVerification = async (req, res, next) => {
           message: "Error occured internally",
           success: false,
         });
-        
+
       });
-  } else{
+  } else {
     res.json({
       status: "failed",
       message: "Verification OTP is not sent!",
