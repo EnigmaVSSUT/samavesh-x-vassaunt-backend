@@ -2,7 +2,8 @@ const sdk = require('api')('@cashfreedocs-new/v3#he81m7ldwtny5h');
 const User = require('../../models/user')
 
 const makePayment = (req, res, next)=>{
-    const userId = req.body.userId
+    const userId = req.user.userId
+    // console.log(req.user)
     User.findById(userId).then((user)=>{
         // console.log(user)
         // console.log(user.email, user.phone)
