@@ -17,6 +17,7 @@ const makePayment = (req, res, next)=>{
           link_notes: {userId: userId},
           link_meta: {
             upi_intent: true,
+            return_url: `http://localhost:3000/ticketgen?link_id={link_id}`
         },
           link_id: `${user._id}`,
           link_amount: 1000,
@@ -26,8 +27,8 @@ const makePayment = (req, res, next)=>{
           link_auto_reminders: false,
           link_expiry_time: '2023-03-14T15:04:05+05:30'
         }, {
-          'x-client-id': '32104964618f222ca9b7ed4b17940123',
-          'x-client-secret': 'ee71924aec8417ab39de66274086488daa5ceacd',
+          'x-client-id': process.env.CF_APPID,
+          'x-client-secret': process.env.CF_APPKEY,
           'x-api-version': '2022-09-01'
         })
           .then(({ data }) => res.json(data))
