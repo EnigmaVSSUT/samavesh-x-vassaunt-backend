@@ -10,8 +10,8 @@ const getPayment = (req, res, next)=>{
         sdk.server('https://sandbox.cashfree.com/pg');
         sdk.getPaymentLinkDetails({
           link_id: userId,
-          'x-client-id': '32104964618f222ca9b7ed4b17940123',
-          'x-client-secret': 'ee71924aec8417ab39de66274086488daa5ceacd',
+          'x-client-id': process.env.CF_APPID,
+          'x-client-secret':process.env.CF_APPKEY,
           'x-api-version': '2022-09-01'
         })
           .then(({ data }) => res.json(data))

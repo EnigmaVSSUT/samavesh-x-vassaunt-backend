@@ -2,6 +2,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const eventSchema = new Schema({
+    email:{
+        type:String,
+    },
     day: {
         type: Number,
         required: true,
