@@ -27,11 +27,11 @@ const eventSchema = new Schema({
         required: true
     },
     startTime: {
-        type: Number,
+        type: String,
         required: true
     },
     endTime: {
-        type: Number,
+        type: String,
         required: true
     },
     firstPrize: {
