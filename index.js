@@ -5,7 +5,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 // const userRouter = require('./routes/userRoute')
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', '*', 'https://www.festvssut.fun']
+}));
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
