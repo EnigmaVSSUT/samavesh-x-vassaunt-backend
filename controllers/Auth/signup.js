@@ -1,7 +1,7 @@
 const User = require('../../models/user')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-
+const nodemailer = require('nodemailer');
 const signUp = async (req, res, next) => {
     const { username, email, password, isVssutian, regdNo, college, graduationYear, branch, phone } = req.body
     console.log(req.body)
@@ -10,12 +10,12 @@ const signUp = async (req, res, next) => {
         if (!email || !password || !username || isVssutian == null || !college || !graduationYear || !branch || !phone || !regdNo) {
             res.json({
                 success: false,
-                message: 'All fields must be filled backend'
+                message: 'All fields must be filled!!!'
             })
         } else {
             const emailExist = await User.findOne({ email });
             let regdExist
-            if(regdNo != 1) regdExist = await User.findOne({ regdNo });
+            if (regdNo != 1) regdExist = await User.findOne({ regdNo });
 
             if (emailExist || regdExist) {
                 res.json({
@@ -41,7 +41,7 @@ const signUp = async (req, res, next) => {
                     phone
                 })
 
-                user.save().then(user => {
+                user.save().then(async (user) => {
                     const userId = user._id;
                     const email = user.email;
                     const isVssutian = user.isVssutian;
@@ -54,7 +54,23 @@ const signUp = async (req, res, next) => {
                     const phone = user.phone;
 
                     const token = jwt.sign({ userId, email, isVssutian, regdNo, events, college, graduationYear, branch, paymentStatus, phone }, process.env.SECRET)
+                    if (!isVssutian) {
+                        const transporter = nodemailer.createTransport({
+                            host: "smtp.gmail.com",
+                            auth: {
+                                user: process.env.EMAIL,
+                                pass: process.env.PASSWORD,
+                            },
+                        });
+                        const mailOptions = {
+                            from: process.env.EMAIL,
+                            to: user.email,
+                            subject: 'Complete Payment - FEST VSSUT',
+                            html: ``,
+                        }
+                        // transporter.sendMail(mailOptions).then(())
 
+                    }
                     res.json({
                         token,
                         success: true,
