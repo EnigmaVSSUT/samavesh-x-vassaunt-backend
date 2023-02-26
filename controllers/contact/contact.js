@@ -9,7 +9,7 @@ const contact = async (req, res, next) => {
     });
     const mailOption = {
         from: process.env.EMAIL,
-        to: proces.env.EMAIL,
+        to: process.env.EMAIL,
         subject: "Query",
         html: `<h2>${req.body.email}</h2> <br></br> <h2>${req.body.name}</h2> <h2>${req.body.number}</h2><h2>${req.body.query}</h2>`
     }
