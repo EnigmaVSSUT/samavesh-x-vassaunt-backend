@@ -4,13 +4,13 @@ const bcrypt = require('bcryptjs')
 
 const signUp = async (req, res, next) => {
     const { username, email, password, isVssutian, regdNo, college, graduationYear, branch, phone } = req.body
-
+    console.log(req.body)
 
     try {
         if (!email || !password || !username || isVssutian == null || !college || !graduationYear || !branch || !phone || !regdNo) {
             res.json({
                 success: false,
-                message: 'All fields must be filled'
+                message: 'All fields must be filled backend'
             })
         } else {
             const emailExist = await User.findOne({ email });
