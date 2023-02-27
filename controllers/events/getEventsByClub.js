@@ -3,8 +3,9 @@ const Event = require("../../models/events");
 const Club = require("../../models/club")
 const getEventsByClub = async (req, res, next) => {
 
-    Event.find({ organiser: req.params.club }).then((events, err) => {
+    Event.find({ organiser: req.params.club }, (err, events) => {
         if (!err)
+
 
             Club.find({ name: req.params.club }).then((club) => {
 
@@ -14,7 +15,8 @@ const getEventsByClub = async (req, res, next) => {
             }).catch((err) => {
                 res.json({ message: "Error occured!" })
             });
-        else res.json({ message: "Error occured!" })
+        else res.json({ messahe: "Error occured!" });
+
     })
 
 
