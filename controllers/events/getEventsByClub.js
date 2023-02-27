@@ -2,19 +2,18 @@ const User = require("../../models/user");
 const Event = require("../../models/events");
 const Club = require("../../models/club")
 const getEventsByClub = async (req, res, next) => {
-    let club;
-    let events;
-    let poc;
-    await Event.find({ organiser: req.params.club }).then((eve) => {
-        events = eve
-    })
-    await Club.find({ name: req.params.club }).then((clu) => {
-        club = clu
-        poc = [{ one: clu.facultyAdvisor, two: clu.facultyAdvisorPhoto, three: clu.facultyAdvisorDepartment }, { one: clu.poc2, two: clu.poc2pic, three: clu.poc2ph }, { one: clu.poc1, two: clu.poc1pic, three: clu.poc1ph }]
 
+    Event.find({ organiser: req.params.club }).then((events) => {
+
+        Club.find({ name: req.params.club }).then((club) => {
+
+
+
+            res.json({ message: "events fetched", events, club, poc: [{ one: club.facultyAdvisor, two: club.facultyAdvisorPhoto, three: club.facultyAdvisorDepartment }, { one: club.poc2, two: club.poc2pic, three: club.poc2ph }, { one: club.poc1, two: club.poc1pic, three: club.poc1ph }] });
+        })
     })
 
-    res.json({ message: "events fetched", events, club, poc });
+
 
 }
 module.exports = getEventsByClub;
