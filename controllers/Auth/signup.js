@@ -43,6 +43,7 @@ const signUp = async (req, res, next) => {
 
                 user.save().then(async (user) => {
                     const userId = user._id;
+                    const username = user.username;
                     const email = user.email;
                     const isVssutian = user.isVssutian;
                     const regdNo = user.regdNo;
@@ -53,7 +54,7 @@ const signUp = async (req, res, next) => {
                     const paymentStatus = user.paymentStatus;
                     const phone = user.phone;
 
-                    const token = jwt.sign({ userId, email, isVssutian, regdNo, events, college, graduationYear, branch, paymentStatus, phone }, process.env.SECRET)
+                    const token = jwt.sign({ username, userId, email, isVssutian, regdNo, events, college, graduationYear, branch, paymentStatus, phone }, process.env.SECRET)
                     if (!isVssutian) {
                         const transporter = nodemailer.createTransport({
                             host: "smtp.gmail.com",
@@ -69,7 +70,7 @@ const signUp = async (req, res, next) => {
                             html: `<html lang="en">
   <head> </head>
   <body>
-    <h4>Hello ${user.name}, Thankyou for the registration</h4>
+    <h4>Hello ${user.username}, Thankyou for the registration</h4>
     <h6>follow the next steps to complete the registration process.</h6>
     <ol>
       <li>Pay an amount of INR 499/- to the bank account given below.</li>

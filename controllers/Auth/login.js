@@ -40,9 +40,10 @@ const login = async (req, res, next) => {
                     const branch = user.branch;
                     const paymentStatus = user.paymentStatus;
                     const phone = user.phone;
+                    const username = user.username
 
 
-                    const token = jwt.sign({ userId, email, isVssutian, regdNo, events, college, graduationYear, branch, paymentStatus, phone }, process.env.SECRET)
+                    const token = jwt.sign({ username, userId, email, isVssutian, regdNo, events, college, graduationYear, branch, paymentStatus, phone }, process.env.SECRET)
 
                     res.json({
                         success: true,
