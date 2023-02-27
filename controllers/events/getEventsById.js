@@ -1,7 +1,7 @@
 const Event = require("../../models/events");
 
 const getEventsById = async (req, res, next) => {
-    Event.find({ organiser: req.params.eventId }).then(async (events) => {
+    Event.find({ _id: req.params.eventId }).then(async (events) => {
         res.json({ message: "Events are ready!", events });
 
     }).catch((err) => {
