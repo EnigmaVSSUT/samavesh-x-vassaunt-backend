@@ -2,8 +2,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const eventSchema = new Schema({
-    email:{
-        type:String,
+    orgId: { type: mongoose.Types.ObjectId, ref: "Club" },
+    email: {
+        type: String,
     },
     day: {
         type: Number,
@@ -58,4 +59,4 @@ const eventSchema = new Schema({
     ]
 }, { timestamps: true })
 
-module.exports = mongoose.model('event', eventSchema)
+module.exports = mongoose.model('Event', eventSchema)

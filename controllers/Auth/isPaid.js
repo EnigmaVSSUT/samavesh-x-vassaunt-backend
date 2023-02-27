@@ -2,7 +2,7 @@ const User = require("../../models/user");
 module.exports = async (req, res, next) => {
   User.findById(req.user.userId).then(async (user) => {
 
-    if (user.paymentStatus === True) {
+    if (user.paymentStatus === true) {
       next();
     } else {
       res.json({

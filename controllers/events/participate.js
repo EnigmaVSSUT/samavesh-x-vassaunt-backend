@@ -5,8 +5,12 @@ module.exports = async (req, res) => {
 
     User.findByIdAndUpdate(userId, { $push: { events: await req.body.eventId } }, { new: true }).then(async (participated) => {
 
-        res.json({ Message: `Hurray! you are in for ${await req.body.eventName} see you soon!`, participated, success: true })
+        Event.findByIdAndUpdate(await req.body.eventId, { $push: { participants: userId } }, { new: true }).then(async (event) => {
+
+            res.json({ Message: `Hurray! you are in for ${event.eventName} see you soon!`, participated, success: true })
+        })
     }).catch((err) => {
+        console.log(err)
         res.json({ message: "An error occured internally", success: false })
 
     })
