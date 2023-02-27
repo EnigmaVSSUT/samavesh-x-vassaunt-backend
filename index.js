@@ -20,11 +20,15 @@ const paymentRoutes = require('./routes/payment/payment.routes')
 app.use("/api/payment", paymentRoutes)
 const contactRoutes = require("./routes/contact/contact.routes")
 app.use("/api/contact", contactRoutes);
+const clubRoutes = require("./routes/club/club.routes")
+app.use("/api/clubs", clubRoutes);
 mongoose.set("strictQuery", false);
+
+const port = process.env.PORT || 8000
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
-    app.listen(8000, () => {
+    app.listen(port, () => {
       console.log("connected to db");
     });
   })

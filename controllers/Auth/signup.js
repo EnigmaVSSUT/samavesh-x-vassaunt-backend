@@ -66,16 +66,78 @@ const signUp = async (req, res, next) => {
                             from: process.env.EMAIL,
                             to: user.email,
                             subject: 'Complete Payment - FEST VSSUT',
-                            html: ``,
+                            html: `<html lang="en">
+  <head> </head>
+  <body>
+    <h4>Hello ${user.name}, Thankyou for the registration</h4>
+    <h6>follow the next steps to complete the registration process.</h6>
+    <ol>
+      <li>Pay an amount of INR 499/- to the bank account given below.</li>
+      <table>
+        <tr>
+          <td>Bank</td>
+          <td>Canara Bank</td>
+        </tr>
+        <tr>
+          <td>Branch</td>
+          <td>Burla ,Odisha , 768017</td>
+        </tr>
+        <tr>
+          <td>Account name</td>
+          <td>VPO IDEA CLUB VSSUT BURLA</td>
+        </tr>
+        <tr>
+          <td>Account Number</td>
+          <td>80622200011833</td>
+        </tr>
+        <tr>
+          <td>IFSC Code</td>
+          <td>CNRB0018062</td>
+        </tr>
+      </table>
+      <li>
+        Reply this particular mail with screenshot and the transaction ID of
+        your transaction.
+      </li>
+      <li>
+        You are all set this step is on us. we will verify you soon and you can
+        take part in any event.
+      </li>
+    </ol>
+    <h5>Note</h5>
+    <ul>
+      This transaction is done for the fest pass of Samavesh-X-Vassaunt.
+    </ul>
+    <ul>
+      This transactionis done to VSSUT,Burla
+    </ul>
+    <ul>This transaction is for the accomodation and fest participations for non VSSUT student.</ul>
+    <ul>This will not include fooding.</ul>
+    <ul>
+      In case of any query email on
+      <em>fest.vssut@gmail.com</em>
+    </ul>
+    Thank You, <br>
+    Pallav Kumar Patra
+  </body>
+</html>
+`,
                         }
-                        // transporter.sendMail(mailOptions).then(())
+                        transporter.sendMail(mailOptions).then((email) => {
+                            res.json({ message: "Registration Successful ! You have been sent an email at " + user.email + " kindly go through and follow the process to get verified." })
+                        }).catch(err => {
+                            message: "Internal error occured!"
+                        })
 
                     }
-                    res.json({
-                        token,
-                        success: true,
-                        message: "Registration successful"
-                    })
+                    else {
+                        res.json({
+                            token,
+                            success: true,
+                            message: "Registration successful"
+                        })
+
+                    }
                 }).catch(error => {
                     console.log(error);
                     res.json({
