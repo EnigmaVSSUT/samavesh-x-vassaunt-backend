@@ -15,4 +15,4 @@ const clubSchema = new mongoose.Schema({
     poc2ph: String,
     poc2pic: String,
 })
-module.exorts = mongoose.model("Club", clubSchema);
+module.exports = mongoose.model("Club", clubSchema);
