@@ -22,7 +22,7 @@ const signUp = async (req, res, next) => {
             if(regdIndex == -1){
               res.json({
                 success: false,
-                message: "Registration number does not exist"
+                message: "Registration number does not exist. If you think this is a mistake then contact us via the contact page"
               })
             } else{
               if (emailExist || regdExist) {
