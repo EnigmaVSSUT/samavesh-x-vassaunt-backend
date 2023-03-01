@@ -66,6 +66,11 @@ const signUp = async (req, res, next) => {
             const phone = user.phone;
 
             const token = jwt.sign({ username, userId, email, isVssutian, regdNo, events, college, graduationYear, branch, paymentStatus, phone }, process.env.SECRET)
+            res.json({
+              token,
+              success: true,
+              message: "Registration successful"
+            })
             if (!isVssutian) {
               const transporter = nodemailer.createTransport({
                 host: "smtp.gmail.com",
@@ -142,14 +147,7 @@ const signUp = async (req, res, next) => {
               })
 
             }
-            else {
-              res.json({
-                token,
-                success: true,
-                message: "Registration successful"
-              })
 
-            }
           }).catch(error => {
             console.log(error);
             res.json({
