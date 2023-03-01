@@ -16,7 +16,7 @@ const signUp = async (req, res, next) => {
         } else {
             const emailExist = await User.findOne({ email });
             let regdExist
-            if (regdNo != 1) regdExist = await User.findOne({ regdNo });
+            if (isVssutian) regdExist = await User.findOne({ regdNo });
             const regdIndex = regd.indexOf(regdNo)
             // console.log(regdIndex)
             if(regdIndex == -1){
