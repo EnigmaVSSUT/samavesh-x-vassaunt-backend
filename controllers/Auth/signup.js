@@ -19,11 +19,14 @@ const signUp = async (req, res, next) => {
       if (isVssutian) regdExist = await User.findOne({ regdNo });
       const regdIndex = regd.indexOf(regdNo)
       // console.log(regdIndex)
-      if (regdIndex == -1) {
-        res.json({
-          success: false,
-          message: "Registration number does not exist. If you think this is a mistake then contact us via the contact page"
-        })
+      if (isVssutian) {
+        if (regdIndex === -1) {
+          res.json({
+            success: false,
+            message: "Registration number does not exist. If you think this is a mistake then contact us via the contact page"
+          })
+        }
+
       } else {
         if (emailExist || regdExist) {
           res.json({
