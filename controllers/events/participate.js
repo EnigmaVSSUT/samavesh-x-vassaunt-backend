@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
     User.findByIdAndUpdate(userId, { $addToSet: { events: await req.body.eventId } }, { new: true }).then(async (participated) => {
 
         Event.findByIdAndUpdate(await req.body.eventId, { $addToSet: { participants: userId } }, { new: true }).then(async (event) => {
-            res.json({ Message: `Hurray! you are in for ${event.eventName} see you soon!`, participated, success: true })
+            return res.json({ Message: `Hurray! you are in for ${event.eventName} see you soon!`, participated, success: true })
         })
     }).catch((err) => {
         console.log(err)
