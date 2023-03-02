@@ -82,7 +82,7 @@ const signUp = async (req, res, next) => {
     <head> </head>
     <body>
       <h4>Hello ${user.username}, Thankyou for the registration</h4>
-      <p>Your userID is${user._id}</p>
+      <p>Your userID is ${user._id}</p>
       <h6>follow the next steps to complete the registration process.</h6>
       <ol>
         <li>Pay an amount of INR 499/- for participating in all the events and availing accomodation.</li>
