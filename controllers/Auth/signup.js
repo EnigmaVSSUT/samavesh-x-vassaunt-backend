@@ -18,16 +18,15 @@ const signUp = async (req, res, next) => {
       let regdExist
       if (isVssutian) regdExist = await User.findOne({ regdNo });
       const regdIndex = regd.indexOf(regdNo)
-      // console.log(regdIndex)
-      if (isVssutian) {
-        if (regdIndex === -1) {
+      console.log(regdIndex)
+      
+        if (isVssutian && regdIndex === -1) {
           res.json({
             success: false,
             message: "Registration number does not exist. If you think this is a mistake then contact us via the contact page"
           })
         }
-
-      } else {
+       else {
         if (emailExist || regdExist) {
           res.json({
             success: false,
@@ -125,7 +124,7 @@ const signUp = async (req, res, next) => {
         This transaction is done for the fest pass of Samavesh-X-Vassaunt.
       </ul>
       <ul>
-        This transactionis done to VSSUT,Burla
+        This transaction is done to VSSUT,Burla
       </ul>
       
       <ul>This will not include fooding.</ul>
