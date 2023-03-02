@@ -32,6 +32,7 @@ const userSchema = new Schema({
     graduationYear: { type: Number, required: true },
     branch: { type: String, required: true },
     paymentStatus: { type: Boolean, required: true, default: false },
+    paymentType: {type: Number},
     ticketGenerated: { type: Boolean, required: true, default: false },
     phone: { type: String, required: true }
 }, { timestamps: true })
