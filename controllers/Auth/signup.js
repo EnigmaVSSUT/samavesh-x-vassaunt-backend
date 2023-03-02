@@ -146,6 +146,7 @@ const signUp = async (req, res, next) => {
               transporter.sendMail(mailOptions).then((email) => {
                 res.json({ message: "Registration Successful ! You have been sent an email at " + user.email + " kindly go through and follow the process to get verified." })
               }).catch(err => {
+                console.log(err)
                 message: "Internal error occured!"
               })
 

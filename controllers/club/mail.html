@@ -7,7 +7,7 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow: scroll;
       width: 100vw;
     "
   >
@@ -83,7 +83,12 @@
           width: 100%;
         "
       >
-        <h3>xxxxxx</h3>
+        <h3>
+          ${date.getHours() < 10 ? '0' + date.getHours() :
+          date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() :
+          date.getMinutes()}:${date.getSeconds() < 10 ? '0' + date.getSeconds()
+          : date.getSeconds()}
+        </h3>
         <span style="display: flex; align-items: center">
           <a href="https://enigmavssut.com/" target="_blank">
             <img
