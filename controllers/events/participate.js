@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 module.exports = async (req, res) => {
     const userId = req.user.userId;
     const eventsArray = await User.findById(userId).select('events -_id')
-    if (eventsArray.includes(await req.body.eventId)) {
+    if (eventsArray.indexOf(await req.body.eventId) !== -1) {
         return res.json({ message: "You have already Registered for the event!" })
     }
 
