@@ -87,9 +87,12 @@ const signUp = async (req, res, next) => {
     <head> </head>
     <body>
       <h4>Hello ${user.username}, Thankyou for the registration</h4>
+      <p>Your userID is${user._id}</p>
       <h6>follow the next steps to complete the registration process.</h6>
       <ol>
-        <li>Pay an amount of INR 499/- to the bank account given below.</li>
+        <li>Pay an amount of INR 499/- for participating in all the events and availing accomodation.</li>
+        <li>To avail the star night pass pay 349/- , this transaction doesn't include accomodation and fest events participation and just allows entry at the star night itself and no other day.</li>
+        <li>payment must be done to the below bank account.</li>
         <table>
           <tr>
             <td>Bank</td>
@@ -114,7 +117,7 @@ const signUp = async (req, res, next) => {
         </table>
         <li>
           Reply this particular mail with screenshot and the transaction ID of
-          your transaction.
+          your transaction. and your USER ID sent in this mail.
         </li>
         <li>
           You are all set this step is on us. we will verify you soon and you can
@@ -128,7 +131,7 @@ const signUp = async (req, res, next) => {
       <ul>
         This transactionis done to VSSUT,Burla
       </ul>
-      <ul>This transaction is for the accomodation and fest participations for non VSSUT student.</ul>
+      
       <ul>This will not include fooding.</ul>
       <ul>
         In case of any query email on
