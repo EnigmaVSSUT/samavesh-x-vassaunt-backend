@@ -130,7 +130,7 @@ const signUp = async (req, res, next) => {
       <ul>This will not include fooding.</ul>
       <ul>
         In case of any query email on
-        <em>fest.vssut@gmail.com</em>
+        <em>fest.vssut2023@gmail.com</em> 
       </ul>
       Thank You, <br>
       Pallav Kumar Patra
