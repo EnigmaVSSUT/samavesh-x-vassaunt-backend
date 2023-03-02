@@ -6,9 +6,9 @@ module.exports = async (req, res) => {
     const userId = req.user.userId;
  
 
-    User.findByIdAndUpdate(userId, { $push: { events: await req.body.eventId } }, { new: true }).then(async (participated) => {
+    User.findByIdAndUpdate(userId, { $addToSet: { events: await req.body.eventId } }, { new: true }).then(async (participated) => {
 
-        Event.findByIdAndUpdate(await req.body.eventId, { $push: { participants: userId } }, { new: true }).then(async (event) => {
+        Event.findByIdAndUpdate(await req.body.eventId, { $addToSet: { participants: userId } }, { new: true }).then(async (event) => {
 
             const transporter = nodemailer.createTransport({
                 host: "smtp.gmail.com",
