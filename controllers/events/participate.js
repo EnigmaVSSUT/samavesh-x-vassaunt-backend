@@ -3,7 +3,8 @@ const User = require("../../models/user");
 const nodemailer = require("nodemailer");
 
 module.exports = async (req, res) => {
-    const userId = req.user.userId;  
+    const userId = req.user.userId;
+    const eventsArray = await User.findById(userId).select('events -_id')
 
     User.findByIdAndUpdate(userId, { $push: { events: await req.body.eventId } }, { new: true }).then(async (participated) => {
 
@@ -12,8 +13,8 @@ module.exports = async (req, res) => {
             const transporter = nodemailer.createTransport({
                 host: "smtp.gmail.com",
                 auth: {
-                  user: process.env.EMAIL,
-                  pass: process.env.PASSWORD,
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD,
                 },
             });
 
@@ -26,7 +27,7 @@ module.exports = async (req, res) => {
 
             await transporter
                 .sendMail(mailOption)
-                .then(()=>{
+                .then(() => {
                     res.json({ Message: `Hurray! you are in for ${event.eventName} see you soon!`, participated, success: true })
                 })
         })
