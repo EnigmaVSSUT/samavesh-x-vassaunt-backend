@@ -5,6 +5,9 @@ const nodemailer = require("nodemailer");
 module.exports = async (req, res) => {
     const userId = req.user.userId;
     const eventsArray = await User.findById(userId).select('events -_id')
+    if (eventsArray.includes(await req.body.eventId)) {
+        return res.json({ message: "You have already Registered for the event!" })
+    }
 
     User.findByIdAndUpdate(userId, { $push: { events: await req.body.eventId } }, { new: true }).then(async (participated) => {
 
