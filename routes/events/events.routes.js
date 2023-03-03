@@ -9,6 +9,7 @@ const getEventsById = require("../../controllers/events/getEventsById")
 const getEventsByClub = require("../../controllers/events/getEventsByClub")
 const getExpo = require("../../controllers/events/getExpo")
 const getEventLink = require('../../controllers/events/getEventLink')
+const getParticipantsForEvents = require("../../controllers/events/getParticipantsForEvent")
 router.get("/getEvents", getEvents);
 router.put("/participate", tokenValidator, isPaid, participate);
 router.put("/withdraw", tokenValidator, withdraw);
@@ -17,4 +18,5 @@ router.get("/getEventsByClub/:club", getEventsByClub);
 router.get("/getEventById/:eventId", getEventsById);
 router.get("/getExpo", getExpo);
 router.get("/getEventLink", getEventLink)
+router.get("/getParticipantsForEvents", getParticipantsForEvents);
 module.exports = router;
