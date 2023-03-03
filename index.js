@@ -24,6 +24,8 @@ const clubRoutes = require("./routes/club/club.routes")
 app.use("/api/clubs", clubRoutes);
 const userRoutes = require('./routes/user/user.routes')
 app.use("/api/users", userRoutes);
+const ticketRoutes = require('./routes/ticket/ticket.routes')
+app.use("/api/ticket", ticketRoutes)
 mongoose.set("strictQuery", false);
 
 const port = process.env.PORT || 8000
