@@ -1,6 +1,5 @@
 const Event = require("../../models/events");
 const User = require("../../models/user");
-const nodemailer = require("nodemailer");
 
 module.exports = async (req, res) => {
     const userId = req.user.userId;
