@@ -40,7 +40,7 @@ const genTicket = (req, res, next)=>{
                         html: `
                         <html>
                         <body style="font-family: cursive; width: 650px;margin: 30px 100px;">
-                            <div style="display: flex; flex-direction: row;border: 2px solid rgb(0, 0, 0);border-radius: 8px;">
+                            <div style="display: flex; flex-direction: row;border: 2px solid rgb(0, 0, 0);border-radius: 8px;background-color: white;">
                                 <div> 
                                     <img style="width:450px;
                                                 height:auto" 
@@ -76,23 +76,22 @@ const genTicket = (req, res, next)=>{
                             subject: "Samavesh X Vassaunt Ticket",
                             html: `
                             <html>
-                            <body style="font-family: cursive;">
-                                <div style="display: inline-flex;border-radius: 10px ;border: 2px solid black;">
-                                    <div>
-                                        <img src="https://raw.githubusercontent.com/SamSoham/Demo/main/left.png" alt="left" width="500px" height="250px">
-                                    </div>
-                                    <div style="padding: 10px;">
-                                        <h2>Boarding Pass</h2>
-                                        <div class="head">
-                                            <h4>Student Details</h4>
-                                            <p>${user.username}</p>
-                                            <p>${user.college}</p>
-                                            <p>${user._id}</p>
-                                        </div>
-                                    </div>
-                                </div>    
-                            </body>
-                            </html>
+                        <body style="font-family: cursive; width: 650px;margin: 30px 100px;">
+                            <div style="display: flex; flex-direction: row;border: 2px solid rgb(0, 0, 0);border-radius: 8px;background-color: white;">
+                                <div> 
+                                    <img style="width:450px;
+                                                height:auto" 
+                                     src="https://raw.githubusercontent.com/SamSoham/Demo/main/left.png" alt="">
+                                </div>
+                               <div style="margin-left: 15px;">
+                                <h2 style="margin-bottom: 25px;color: #4a437e;">Boarding Pass</h2>
+                                <p style="font-size: 16px;">${user.username}</p>
+                                <p style="font-size: 16px;">${user.college}</p>
+                                <p style="font-size: 12px; font-weight: 600;">${user._id}</p>
+                               </div>
+                            </div>
+                        </body>
+                        </html>
                             `
                         };
     
