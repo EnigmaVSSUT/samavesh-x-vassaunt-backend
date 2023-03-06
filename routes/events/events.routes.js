@@ -18,5 +18,5 @@ router.get("/getEventsByClub/:club", getEventsByClub);
 router.get("/getEventById/:eventId", getEventsById);
 router.get("/getExpo", getExpo);
 router.get("/getEventLink", getEventLink)
-router.get("/getParticipantsForEvents", getParticipantsForEvents);
+router.get("/getParticipantsForEvents/:eventId", getParticipantsForEvents);
 module.exports = router;
